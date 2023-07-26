@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import {Container} from 'react-bootstrap';
+import HomeScreen from './pages/HomeScreen';
+import ProductScreen from './pages/ProductScreen';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header/>
+        <main className="py-3">
+        <Container>
+        {/* <h1>My E-Comm App!❤</h1> */}
+         {/* <HomeScreen /> */}
+         <Routes>
+          <Route path='/' element={<HomeScreen/>} exact />
+          <Route path='/product/:id' element={<ProductScreen/>} />
+         </Routes>
+        </Container>
+        </main>
+      <Footer/>
+    </Router>
   );
 }
 
