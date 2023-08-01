@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {Row, Col} from 'react-bootstrap'
 // import products from '../products'
 import Product from '../components/Product';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 // import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import {listProdcts} from '../actions/productActions'
@@ -22,8 +24,8 @@ function HomeScreen() {
         <h1>My E-Comm App!❤</h1>
         <hr style={{"marginBottom":"50px"}}/>
         <h2>Latest Products</h2>
-        {loading ? <h2>Loading...</h2>
-          : error ? <h3>{error}</h3> 
+        {loading ? <Loader />
+          : error ? <Message variant='danger'>{error}</Message>
             :
             <Row>
             {products.map(product => (
