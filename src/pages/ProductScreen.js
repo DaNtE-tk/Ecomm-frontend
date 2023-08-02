@@ -8,8 +8,9 @@ import {useDispatch, useSelector} from 'react-redux'
 import {listProductDetails} from '../actions/productActions'
 // import products from '../products'
 // import axios from 'axios';
+import history from '../history'
 
-function ProductScreen({match,history}) {
+function ProductScreen({match}) {
     const [qty, setQty] = useState(1)
 
     const dispatch = useDispatch()
