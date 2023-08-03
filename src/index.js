@@ -6,11 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import './bootstrap.min.css';
 import {Provider} from 'react-redux'
 import store from './store'
+import history from './history'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
-    <App />
+  <Provider store={store} history={history}>
+      <App />
   </Provider>
 );
 
