@@ -19,7 +19,11 @@ function App() {
          <Routes>
           <Route path='/' element={<HomeScreen/>} exact />
           <Route path='/product/:id' element={<ProductScreen/>} />
-          <Route path='/cart/:id?' element={<CartScreen/>} />
+          {/* <Route path='/cart/:id?' element={<CartScreen/>} /> */}
+          <Route path='/cart'>
+            <Route path=':productId' element={<CartScreen/>} />
+            <Route index element ={<CartScreen/>} />
+          </Route>
          </Routes>
         </Container>
         </main>
