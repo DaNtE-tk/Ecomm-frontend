@@ -1,35 +1,29 @@
 import React, {useState, useEffect} from 'react'
-import {Link, useParams} from 'react-router-dom'
+import {Link, useParams, useNavigate} from 'react-router-dom'
 import {Row, Col, Image, ListGroup, Button, Card, Form} from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import {useDispatch, useSelector} from 'react-redux'
 import {listProductDetails} from '../actions/productActions'
-// import products from '../products'
-// import axios from 'axios';
-import history from '../history'
 
-function ProductScreen({match}) {
+function ProductScreen() {
     const [qty, setQty] = useState(1)
 
     const dispatch = useDispatch()
     const {id} = useParams()
+    const navigate = useNavigate();
     const productDetails = useSelector(state => state.productDetails)
     const {loading, error, product} =  productDetails
     // // const product = products.find((p) => String(p._id) === id)
     // const [product,setProduct] = useState([])
     useEffect(()=>{
         dispatch(listProductDetails(id))
-        // async function fetchProduct(){
-        //     const {data} = await axios.get(`/api/products/${id}`)
-        //     setProduct(data)
-        // }
-        // fetchProduct()
-    },[dispatch,match])
+       
+    },[dispatch])
 
     const addToCartHandler = () =>{
-        history.push(`/cart/${id}?qty=${qty}`)
+        navigate(`/cart/${id}?qty=${qty}`)
         // console.log('Add to cart', id)
     }
 
