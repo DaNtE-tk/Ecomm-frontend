@@ -4,9 +4,9 @@ import Footer from './components/Footer';
 import {Container} from 'react-bootstrap';
 import HomeScreen from './pages/HomeScreen';
 import ProductScreen from './pages/ProductScreen';
+import LoginScreen from './pages/LoginScreen';
 import CartScreen from './pages/CartScreen';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
             <Route path=':productId' element={<CartScreen/>} />
             <Route index element ={<CartScreen/>} />
           </Route>
+          <Route path='/login' element={<LoginScreen/>} />
          </Routes>
         </Container>
         </main>
