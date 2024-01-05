@@ -15,7 +15,6 @@ function HomeScreen() {
   useEffect(()=>{
    dispatch(listProdcts())
 
-
   }, [dispatch])
   // const products = []
 
