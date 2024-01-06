@@ -9,7 +9,7 @@ import {
     PRODUCT_DETAILS_REQUEST,
 } from '../constants/productConstants'
 
-export const listProdcts = () => async(dispatch) =>{
+export const listProducts = () => async(dispatch) =>{
     try{
         dispatch({type: PRODUCT_LIST_REQUEST})
         const {data} = await axios.get('/api/products/')

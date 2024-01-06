@@ -6,14 +6,14 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 // import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
-import {listProdcts} from '../actions/productActions'
+import {listProducts} from '../actions/productActions'
 
 function HomeScreen() {
   const dispatch = useDispatch()
   const productList = useSelector(state => state.productList)
   const {error, loading, products} = productList
   useEffect(()=>{
-   dispatch(listProdcts())
+   dispatch(listProducts())
 
   }, [dispatch])
   // const products = []
