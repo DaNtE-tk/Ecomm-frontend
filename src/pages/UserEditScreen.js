@@ -10,7 +10,7 @@ import { USER_UPDATE_RESET } from '../constants/userConstants'
 
 
 
-function EditUserScreen() {
+function UserEditScreen() {
 
     const { userId } = useParams('')
 
@@ -45,7 +45,7 @@ function EditUserScreen() {
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(updateUser({_id: user._id,name,email,isAdmin}))
-        console.log('triggered')
+        console.log('updating user')
     }
 
     return (
@@ -114,4 +114,4 @@ function EditUserScreen() {
     )
 }
 
-export default EditUserScreen
+export default UserEditScreen

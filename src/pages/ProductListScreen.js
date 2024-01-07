@@ -6,7 +6,8 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { LinkContainer } from 'react-router-bootstrap'
 // import { listUsers, deleteUser } from '../actions/userActions'
-import {listProducts, deleteProduct} from '../actions/productActions'
+import {listProducts, deleteProduct, createProduct} from '../actions/productActions'
+import {PRODUCT_CREATE_RESET} from '../constants/productConstants'
 
 function ProductListScreen() {
     const dispatch = useDispatch()
@@ -19,21 +20,29 @@ function ProductListScreen() {
     const {error, loading, products} = productList
 
     const productDelete = useSelector(state => state.productDelete)
-    const {success:successDelete} = productDelete
+    const {loading:loadingDelete, error:errorDelete, success:successDelete} = productDelete
+
+    const productCreate = useSelector(state => state.productCreate)
+    const {loading:loadingCreate, error:errorCreate, success:successCreate, product:createdProduct} = productCreate
 
     console.log(products); 
     // const userDelete = useSelector(state => state.userDelete)
     // const { success:successDelete } = userDelete
 
     useEffect(() => {
-        if( userInfo && userInfo.isAdmin){
-            // navigate('/login')
-           dispatch(listProducts())
-        }else{
+        dispatch({type: PRODUCT_CREATE_RESET})
+
+        if(!userInfo.isAdmin){
             navigate('/login')
-            // dispatch(listProdcts())
+        //    dispatch(listProducts())
         }
-    }, [dispatch, userInfo, successDelete])
+        if(successCreate){
+            navigate(`/admin/product/${createdProduct._id}/edit`)
+        }else{
+            dispatch(listProducts())
+        }
+    }, [dispatch, userInfo, successDelete, successCreate, createdProduct])
+
 
     const deleteHandler = (id) =>{
         // console.log('Delete: ',id);
@@ -46,6 +55,7 @@ function ProductListScreen() {
 
     const createProductHandler = () =>{
         console.log('Creating product');
+        dispatch(createProduct())
     }
 
     return (
@@ -61,6 +71,12 @@ function ProductListScreen() {
                     </Button>
                 </Col>
             </Row>
+            {loadingDelete && <Loader/>}
+            {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+
+            {loadingCreate && <Loader/>}
+            {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+
             {loading ? <Loader />
                 : error ? <Message variant='danger'>{error}</Message>
                     : (
