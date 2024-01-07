@@ -6,7 +6,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { LinkContainer } from 'react-router-bootstrap'
 // import { listUsers, deleteUser } from '../actions/userActions'
-import {listProducts} from '../actions/productActions'
+import {listProducts, deleteProduct} from '../actions/productActions'
 
 function ProductListScreen() {
     const dispatch = useDispatch()
@@ -18,7 +18,10 @@ function ProductListScreen() {
     const productList = useSelector(state => state.productList)
     const {error, loading, products} = productList
 
-    console.log(products);
+    const productDelete = useSelector(state => state.productDelete)
+    const {success:successDelete} = productDelete
+
+    console.log(products); 
     // const userDelete = useSelector(state => state.userDelete)
     // const { success:successDelete } = userDelete
 
@@ -30,13 +33,14 @@ function ProductListScreen() {
             navigate('/login')
             // dispatch(listProdcts())
         }
-    }, [userInfo])
+    }, [dispatch, userInfo, successDelete])
 
     const deleteHandler = (id) =>{
         // console.log('Delete: ',id);
         if(window.confirm('Are you sure you want to delete this product?')){
             // dispatch(deleteUser(id))
             console.log('deleting product');
+            dispatch(deleteProduct(id))
         }
     }
 
