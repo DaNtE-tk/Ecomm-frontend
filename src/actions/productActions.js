@@ -27,10 +27,14 @@ import {
 
 } from '../constants/productConstants'
 
-export const listProducts = (keyword='') => async (dispatch) => {
+export const listProducts = (keyword='', pageNumber='' ) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
-        const { data } = await axios.get(`/api/products?keyword=${keyword}`)
+        console.log(keyword,'',pageNumber);
+        if (pageNumber ==''){
+            pageNumber = 1
+        }
+        const { data } = await axios.get(`/api/products?keyword=${keyword}&page=${pageNumber}`)
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             payload: data
