@@ -26,7 +26,7 @@ function SearchBox() {
     return (
         // <div>SearchBox</div>
         <Form className='mp-auto' onSubmit={submitHandler} inline >
-            <Row>
+            <Row style={{'width':400}}>
                 <Col>
                     <Form.Control
                         type='text'
@@ -42,7 +42,7 @@ function SearchBox() {
                     <Button
                         type='submit'
                         variant='outline-success'
-                        className='p-2'
+                        className='w-50 p-2'
                     >
                         Submit
                     </Button>

@@ -5,20 +5,22 @@ import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
-// import axios from 'axios';
+import ProductCarousel from '../components/ProductCarousel';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions'
 import { useParams } from 'react-router-dom';
 
 function HomeScreen() {
   const dispatch = useDispatch()
+
   const productList = useSelector(state => state.productList)
   const { error, loading, products, page, pages } = productList
 
   let { keyword, pageNumber } = useParams()
-  console.log('kword:', keyword);
 
   useEffect(() => {
+    // dispatch(topProducts())
     dispatch(listProducts(keyword, pageNumber))
 
   }, [dispatch, keyword, pageNumber])
@@ -28,6 +30,11 @@ function HomeScreen() {
     <div>
       <h1>My E-Comm App!❤</h1>
       <hr style={{ "marginBottom": "50px" }} />
+      
+      {!keyword && (
+        <ProductCarousel />
+      )}
+      <br/>
       <h2>Latest Products</h2>
       {loading ? <Loader />
         : error ? <Message variant='danger'>{error}</Message>
