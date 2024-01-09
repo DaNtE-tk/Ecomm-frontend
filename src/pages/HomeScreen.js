@@ -7,15 +7,20 @@ import Message from '../components/Message';
 // import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import {listProducts} from '../actions/productActions'
+import { useParams } from 'react-router-dom';
 
 function HomeScreen() {
   const dispatch = useDispatch()
   const productList = useSelector(state => state.productList)
   const {error, loading, products} = productList
-  useEffect(()=>{
-   dispatch(listProducts())
 
-  }, [dispatch])
+  let {keyword} = useParams()
+  console.log('kword:',keyword);
+
+  useEffect(()=>{
+   dispatch(listProducts(keyword))
+
+  }, [dispatch, keyword])
   // const products = []
 
   return (
